@@ -1,12 +1,30 @@
 raster_reclass = function(input){
+  tmp_output = "tmp.tif"
   output = paste0("data/", basename(input))
   
   gdal_calc = Sys.which("gdal_calc.py")
   
-  calc_exp = '"10*(A<=12)+20*(A==20)+30*(A==30)+40*(A==40)+50*(A==50)+60*((A>50)*(A<=62))+70*((A>62)*(A<=72))+80*((A>72)*(A<=82))+90*(A==90)+100*(A==100)+110*(A==110)+120*((A>110)*(A<=122))+130*(A==130)+140*(A==140)+150*((A>140)*(A<=153))+160*(A==160)+170*(A==170)+180*(A==180)+190*(A==190)+200*((A>190)*(A<=202))+210*(A==210)+220*(A==220)"'
   
+  calc_exp = paste0("'",
+                    "1*((A==10)+(A==11)+(A==12)+(A==20)+(A==30)+(A==40))+",
+                    "2*((A==50)+(A==60)+(A==61)+(A==62)+(A==70)+(A==71)+(A==72)+(A==80)+(A==81)+(A==82)+(A==90)+(A==100)+(A==160)+(A==170))+",
+                    "3*((A==110)+(A==130))+",
+                    "4*((A==180))+",
+                    "5*((A==190))+",
+                    "6*((A==120)+(A==121)+(A==122))+",
+                    "7*((A==140)+(A==150)+(A==152)+(A==153))+",
+                    "8*((A==200)+(A==201)+(A==202)+(A==220))+",
+                    "9*((A==210))",
+                    "'")
+
   system(sprintf("python %s -A %s --outfile=%s --calc=%s --type=Byte --NoDataValue=0",
-                 gdal_calc, input, output, calc_exp))      
+                 gdal_calc, input, tmp_output, calc_exp))
+  
+  # compressing the output file
+  gdalUtils::gdal_translate(src_dataset = tmp_output,
+                 dst_dataset = output,
+                 co = "COMPRESS=LZW")
+  file.remove(tmp_output)
 }
 
 dir.create("data")
