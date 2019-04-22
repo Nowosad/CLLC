@@ -1,9 +1,9 @@
 raster_reclass = function(input){
+  cat(input, "\n")
   tmp_output = "tmp.tif"
   output = paste0("data/", basename(input))
   
   gdal_calc = Sys.which("gdal_calc.py")
-  
   
   calc_exp = paste0("'",
                     "1*((A==10)+(A==11)+(A==12)+(A==20)+(A==30)+(A==40))+",
@@ -28,7 +28,7 @@ raster_reclass = function(input){
 }
 
 dir.create("data")
-lc_rasters = dir("data-raw/",
+lc_rasters = dir("data-raw",
                  pattern = "^cci_lc.*.tif$", 
                  full.names = TRUE)
 
