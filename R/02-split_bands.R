@@ -1,6 +1,6 @@
 library(gdalUtils)
 library(future.apply)
-plan(multisession, workers = 4)
+plan(multisession, workers = 12)
 
 band_splitter = function(year){
   years = 1992:2015
