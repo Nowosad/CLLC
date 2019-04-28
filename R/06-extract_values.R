@@ -22,4 +22,4 @@ lc_rasters = dir("data",
                  pattern = "^cci_lc.*.tif$", 
                  full.names = TRUE)
 
-lapply(lc_rasters[[1]], lc_composite)
+lapply(lc_rasters, lc_composite)
