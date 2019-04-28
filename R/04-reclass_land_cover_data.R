@@ -1,6 +1,6 @@
 raster_reclass = function(input){
   cat(input, "\n")
-  tmp_output = "tmp.tif"
+  # tmp_output = "tmp.tif"
   output = paste0("data/", basename(input))
   
   gdal_calc = Sys.which("gdal_calc.py")
@@ -16,15 +16,15 @@ raster_reclass = function(input){
                     "8*((A==200)+(A==201)+(A==202)+(A==220))+",
                     "9*((A==210))",
                     "'")
-
-  system(sprintf("python %s -A %s --outfile=%s --calc=%s --type=Byte --NoDataValue=0",
-                 gdal_calc, input, tmp_output, calc_exp))
+  
+  system(sprintf("python %s -A %s --outfile=%s --calc=%s --type=Byte --NoDataValue=0 --co=%s",
+                 gdal_calc, input, output, calc_exp, "COMPRESS=LZW"))
   
   # compressing the output file
-  gdalUtils::gdal_translate(src_dataset = tmp_output,
-                 dst_dataset = output,
-                 co = "COMPRESS=LZW")
-  file.remove(tmp_output)
+  # gdalUtils::gdal_translate(src_dataset = tmp_output,
+  #                           dst_dataset = output,
+  #                           co = "COMPRESS=LZW")
+  # file.remove(tmp_output)
 }
 
 dir.create("data")
