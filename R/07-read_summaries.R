@@ -17,14 +17,9 @@ df = dir("data",
   set_names(c("Year", "Agriculture", "Forest", "Grassland", 
               "Wetland", "Settlement", "Shrubland",
               "Sparse vegetation", "Bare area", "Water", "id")) %>% 
-  left_join(countries, by = "id")
+  left_join(countries, by = "id") %>% 
+  mutate_at(vars(Agriculture:Water), .funs = to_km2) %>% 
+  select(-id)
 
-df_km2 = df %>% 
-  mutate_at(vars(Agriculture:Water), .funs = to_km2)
+readr::write_csv(df, "data/07-summaries.csv")
 
-df2 = df %>% 
-  mutate(sum_area_c = rowSums(.[2:10])) %>% 
-  mutate(sum_area_km2 = sum_area_c * 0.3 * 0.3)
-
-
-# write.csv(a, "tmp.csv")
