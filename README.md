@@ -1,5 +1,9 @@
 # National Land Cover - categories and transitions
 
+## National Land Cover Categories (NLCC)
+
+## National Land Cover Transitions (NLCT)
+
 ## Steps
 
 1. Download National Identifier Grid from SEDAC
