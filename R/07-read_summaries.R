@@ -21,5 +21,6 @@ df = dir("data",
   mutate_at(vars(Agriculture:Water), .funs = to_km2) %>% 
   select(-id)
 
-readr::write_csv(df, "data/07-summaries.csv")
+dir.create("data/database")
+readr::write_csv(df, "data/database/all_summaries.csv")
 
