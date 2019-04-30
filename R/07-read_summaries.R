@@ -16,11 +16,11 @@ df = dir("data",
   map_dfr(gpat_read_txt, .id = "Year") %>% 
   set_names(c("Year", "Agriculture", "Forest", "Grassland", 
               "Wetland", "Settlement", "Shrubland",
-              "Sparse vegetation", "Bare area", "Water", "id")) %>% 
+              "Sparse_vegetation", "Bare_area", "Water", "id")) %>% 
   left_join(countries, by = "id") %>% 
   mutate_at(vars(Agriculture:Water), .funs = to_km2) %>% 
   select(-id)
 
 dir.create("data/database")
-readr::write_csv(df, "data/database/all_summaries.csv")
+readr::write_csv(df, "data/database/nlcc.csv")
 
