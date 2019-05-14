@@ -19,10 +19,14 @@ year2 = 1997:2015
 
 changes5 = map2_dfr(year1, year2, change)
 
-changes5 %>% 
-  readr::write_csv("data/database/nlct.csv")
+# overall dataset ---------------------------------------------------------
+readr::write_csv(changes5, "data/database/nlct.csv")
 
+# creates dataset for epi -------------------------------------------------
 dir.create("data/epi")
-changes5 %>%
-  select(NAME0, Year_change, Grassland, Wetland) %>% 
-  readr::write_csv("data/epi/changes5.csv")
+epi_gw_5 = changes5 %>%
+  select(NAME0, Year_change, Grassland, Wetland)
+
+readr::write_csv(epi_gw_5, "data/epi/changes5.csv")
+writexl::write_xlsx(epi_gw_5, "data/epi/changes5.xlsx")
+  
