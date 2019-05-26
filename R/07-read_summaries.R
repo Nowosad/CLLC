@@ -24,3 +24,10 @@ df = dir("data",
 dir.create("data/database")
 readr::write_csv(df, "data/database/nlcc.csv")
 
+# creates dataset for epi -------------------------------------------------
+dir.create("data/epi")
+epi_nlcc = df %>%
+  select(NAME0, Year, Grassland, Wetland)
+
+readr::write_csv(epi_nlcc, "data/epi/nlcc.csv")
+writexl::write_xlsx(epi_nlcc, "data/epi/nlcc.xlsx")
