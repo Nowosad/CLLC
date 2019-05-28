@@ -37,3 +37,5 @@ df = dir("data/transitions",
   bind_rows() %>% 
   sort_cols() %>% 
   mutate(`51` = ifelse(is.na(`51`), 0, `51`))
+
+readr::write_csv(df, "data/transitions/all_transitions.csv")
