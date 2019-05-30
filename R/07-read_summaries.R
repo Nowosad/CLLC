@@ -22,7 +22,7 @@ df = dir("data",
   select(-id)
 
 dir.create("data/database")
-readr::write_csv(df, "data/database/nlcc.csv")
+readr::write_csv(df, "data/database/clcc.csv")
 
 # creates dataset for epi -------------------------------------------------
 dir.create("data/epi")

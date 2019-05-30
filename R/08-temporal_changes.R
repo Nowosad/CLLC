@@ -2,7 +2,7 @@ library(dplyr)
 library(purrr)
 
 change = function(year1, year2){
-  df = readr::read_csv("data/database/nlcc.csv", col_types = readr::cols())
+  df = readr::read_csv("data/database/clcc.csv", col_types = readr::cols())
   country_names = filter(df, Year == year1)["NAME0"]
   df1 = filter(df, Year == year1) %>% 
     select(Agriculture:Water)
@@ -20,7 +20,7 @@ year2 = 1997:2015
 changes5 = map2_dfr(year1, year2, change)
 
 # overall dataset ---------------------------------------------------------
-readr::write_csv(changes5, "data/database/nlct.csv")
+readr::write_csv(changes5, "data/database/clct.csv")
 
 # creates dataset for epi -------------------------------------------------
 dir.create("data/epi")
