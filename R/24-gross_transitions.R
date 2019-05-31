@@ -43,7 +43,7 @@ df = readr::read_csv("data/transitions/all_transitions.csv", guess_max = 5000)
 
 countries = st_read("data/countries.gpkg") %>% 
   st_drop_geometry() %>% 
-  dplyr::select(NAME0, id)
+  dplyr::select(ISOCODE, UNSDCODE, NAME0, id)
 
 # calculations ------------------------------------------------------------
 gross_transitions = c("Agriculture", "Forest", "Grassland", "Wetland", "Settlement", "Shrubland",
@@ -51,15 +51,15 @@ gross_transitions = c("Agriculture", "Forest", "Grassland", "Wetland", "Settleme
   map_dfr(lc_transition, df = df) %>% 
   left_join(countries, by = c("cat" = "id")) %>% 
   mutate_at(vars(Stable:Gross_gain), .funs = to_km2) %>%
-  select(NAME0, Year_change, Land_cover, Stable, Gross_loss, Gross_gain)
+  select(ISOCODE, UNSDCODE, NAME0, Years_transitions = Year_change, Land_cover, Stable, Gross_loss, Gross_gain)
 
 readr::write_csv(gross_transitions, "data/database/gross_changes.csv")
 
 # creates dataset for epi -------------------------------------------------
-dir.create("data/epi")
-epi_gross = gross_transitions %>%
-  filter(Land_cover %in% c("Grassland", "Wetland"))
-
-readr::write_csv(epi_gross, "data/epi/gross_changes.csv")
-writexl::write_xlsx(epi_gross, "data/epi/gross_changes.xlsx")
+# dir.create("data/epi")
+# epi_gross = gross_transitions %>%
+#   filter(Land_cover %in% c("Grassland", "Wetland"))
+# 
+# readr::write_csv(epi_gross, "data/epi/gross_changes.csv")
+# writexl::write_xlsx(epi_gross, "data/epi/gross_changes.xlsx")
 

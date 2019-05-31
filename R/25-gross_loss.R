@@ -40,21 +40,21 @@ df = readr::read_csv("data/transitions/all_transitions.csv", guess_max = 5000)
 
 countries = sf::st_read("data/countries.gpkg") %>% 
   st_drop_geometry() %>% 
-  dplyr::select(NAME0, id)
+  dplyr::select(ISOCODE, UNSDCODE, NAME0, id)
 
 # calculations ------------------------------------------------------------
 gross_loss = c("Agriculture", "Forest", "Grassland", "Wetland", "Settlement", "Shrubland",
                       "Sparse_vegetation", "Bare_area", "Water") %>% 
   map_dfr(lc_loss, df = df) %>% 
   left_join(countries, by = c("cat" = "id")) %>%
-  select(NAME0, Year_change, From, To, Loss)
+  select(ISOCODE, UNSDCODE, NAME0, Year_change, From, To, Loss)
 
 readr::write_csv(gross_loss, "data/database/gross_loss.csv")
 
 # creates dataset for epi -------------------------------------------------
-dir.create("data/epi")
-epi_gross_loss = gross_loss %>%
-  filter(From %in% c("Grassland", "Wetland"))
-
-readr::write_csv(epi_gross_loss, "data/epi/gross_loss.csv")
-writexl::write_xlsx(epi_gross_loss, "data/epi/gross_loss.xlsx")
+# dir.create("data/epi")
+# epi_gross_loss = gross_loss %>%
+#   filter(From %in% c("Grassland", "Wetland"))
+# 
+# readr::write_csv(epi_gross_loss, "data/epi/gross_loss.csv")
+# writexl::write_xlsx(epi_gross_loss, "data/epi/gross_loss.xlsx")

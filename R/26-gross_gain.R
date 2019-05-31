@@ -40,14 +40,14 @@ df = readr::read_csv("data/transitions/all_transitions.csv", guess_max = 5000)
 
 countries = sf::st_read("data/countries.gpkg") %>% 
   st_drop_geometry() %>% 
-  dplyr::select(NAME0, id)
+  dplyr::select(ISOCODE, UNSDCODE, NAME0, id)
 
 # calculations ------------------------------------------------------------
 gross_gain = c("Agriculture", "Forest", "Grassland", "Wetland", "Settlement", "Shrubland",
                       "Sparse_vegetation", "Bare_area", "Water") %>% 
   map_dfr(lc_gain, df = df) %>% 
   left_join(countries, by = c("cat" = "id")) %>%
-  select(NAME0, Year_change, From, To, Gain)
+  select(ISOCODE, UNSDCODE, NAME0, Year_change, From, To, Gain)
 
 readr::write_csv(gross_gain, "data/database/gross_gain.csv")
 
