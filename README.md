@@ -1,10 +1,25 @@
-# National Land Cover - categories and transitions
+# Country-level Land Cover - categories and transitions
 
-## National Land Cover Categories (NLCC)
+## Country-level Land Cover Categories
 
-## National Land Cover Transitions (NLCT)
+[Country-level Land Cover Categories (CLCC)](http://nowosad.github.io/country-level-land-cover/clcc) has information about land cover categories areas (in km<sup>2</sup>) on a country level.
+You can download the data files for different years from 1992 to 2015. 
 
-## Steps
+## Country-level Land Cover Transitions
+
+[Country-level Land Cover Transitions (CLCT)](http://nowosad.github.io/country-level-land-cover/clct) has information about transitions (net changes) of the land cover categories areas (in km<sup>2</sup>) on a country level over five-year periods.
+Positive values indicate an increase of the given land cover category area and negative values indicate a decrease of the given land cover category area.
+You can download the data files for different five-year periods between 1992 to 2015. 
+
+## Country-level Land Cover Gross Changes
+
+[Country-level Land Cover Gross Changes](http://nowosad.github.io/country-level-land-cover/clcgc) has information about gross changes of the land cover categories areas (in km<sup>2</sup>) on a country level over five-year periods.
+
+## Data preparation
+
+The scripts used for data preparation are available in the [`R`](R) folder.
+
+### Steps (CLCC and CLCT)
 
 1. Download National Identifier Grid from SEDAC
 1. Download ESA CCI Land Cover data for years 1992-2015
@@ -14,8 +29,20 @@
 1. Reproject National Identifier Grid data to the [Equal Area Cylindrical](https://proj4.org/operations/projections/cea.html) projection and rasterize it
 1. Calculate land cover categories compositions for each country in each year
 1. Merge datasets and recalculate areas' unit from the number of cells to square kilometers
-1. Calculate land cover transitions (change in land cover categories compositions) over five-year periods
+1. Calculate land cover transitions (net change in land cover categories compositions) over five-year periods
 1. Join land cover categories and land cover transitions with the administrative areas from the National Identifier Grid dataset
+
+### Steps (Gross Changes)
+
+1. Download National Identifier Grid from SEDAC
+1. Download ESA CCI Land Cover data for years 1992-2015
+1. Reproject land cover data to the [Equal Area Cylindrical](https://proj4.org/operations/projections/cea.html) projection
+1. Split reprojected land cover data into 24 separate files (one file per year)
+1. Simplify land cover categories into 9 broader IPCC (Intergovernmental Panel on Climate Change) categories
+1. Reproject National Identifier Grid data to the [Equal Area Cylindrical](https://proj4.org/operations/projections/cea.html) projection and rasterize it
+1. Calculate one raster file for each five-year periods by combining two input rasters, e.g. a new value 12 of a pixel represents change from 1 (agriculture) to 2 (forest)
+1. Extract land cover transitions for each country in each five-year period
+1. Calculate land cover gross changes, gains, and losses over five-year periods
 
 ## References
 
