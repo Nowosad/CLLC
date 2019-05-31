@@ -2,18 +2,18 @@
 
 ## Country-level Land Cover Categories
 
-[Country-level Land Cover Categories (CLCC)](http://nowosad.github.io/country-level-land-cover/clcc) has information about land cover categories areas (in km<sup>2</sup>) on a country level.
+[Country-level Land Cover Categories (CLCC)](https://cl-land-cover.netlify.com/clcc) has information about land cover categories areas (in km<sup>2</sup>) on a country level.
 You can download the data files for different years from 1992 to 2015. 
 
 ## Country-level Land Cover Transitions
 
-[Country-level Land Cover Transitions (CLCT)](http://nowosad.github.io/country-level-land-cover/clct) has information about transitions (net changes) of the land cover categories areas (in km<sup>2</sup>) on a country level over five-year periods.
+[Country-level Land Cover Transitions (CLCT)](https://cl-land-cover.netlify.com/clct) has information about transitions (net changes) of the land cover categories areas (in km<sup>2</sup>) on a country level over five-year periods.
 Positive values indicate an increase of the given land cover category area and negative values indicate a decrease of the given land cover category area.
 You can download the data files for different five-year periods between 1992 to 2015. 
 
 ## Country-level Land Cover Gross Changes
 
-[Country-level Land Cover Gross Changes](http://nowosad.github.io/country-level-land-cover/clcgc) has information about gross changes of the land cover categories areas (in km<sup>2</sup>) on a country level over five-year periods.
+[Country-level Land Cover Gross Changes](https://cl-land-cover.netlify.com/clcgc) has information about gross changes of the land cover categories areas (in km<sup>2</sup>) on a country level over five-year periods.
 
 ## Data preparation
 
@@ -21,8 +21,8 @@ The scripts used for data preparation are available in the [`R`](R) folder.
 
 ### Steps (CLCC and CLCT)
 
-1. Download National Identifier Grid from SEDAC
-1. Download ESA CCI Land Cover data for years 1992-2015
+1. Download [National Identifier Grid from SEDAC](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-national-identifier-grid-rev11)
+1. Download [ESA CCI Land Cover data for years 1992-2015](https://maps.elie.ucl.ac.be/CCI/viewer/)
 1. Reproject land cover data to the [Equal Area Cylindrical](https://proj4.org/operations/projections/cea.html) projection
 1. Split reprojected land cover data into 24 separate files (one file per year)
 1. Simplify land cover categories into 9 broader IPCC (Intergovernmental Panel on Climate Change) categories
@@ -34,13 +34,13 @@ The scripts used for data preparation are available in the [`R`](R) folder.
 
 ### Steps (Gross Changes)
 
-1. Download National Identifier Grid from SEDAC
-1. Download ESA CCI Land Cover data for years 1992-2015
+1. Download [National Identifier Grid from SEDAC](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-national-identifier-grid-rev11)
+1. Download [ESA CCI Land Cover data for years 1992-2015](https://maps.elie.ucl.ac.be/CCI/viewer/)
 1. Reproject land cover data to the [Equal Area Cylindrical](https://proj4.org/operations/projections/cea.html) projection
 1. Split reprojected land cover data into 24 separate files (one file per year)
 1. Simplify land cover categories into 9 broader IPCC (Intergovernmental Panel on Climate Change) categories
 1. Reproject National Identifier Grid data to the [Equal Area Cylindrical](https://proj4.org/operations/projections/cea.html) projection and rasterize it
-1. Calculate one raster file for each five-year periods by combining two input rasters, e.g. a new value 12 of a pixel represents change from 1 (agriculture) to 2 (forest)
+1. Calculate one raster file for each five-year periods by combining two input rasters, e.g., a new value 12 of a pixel represents the change from 1 (agriculture) to 2 (forest)
 1. Extract land cover transitions for each country in each five-year period
 1. Calculate land cover gross changes, gains, and losses over five-year periods by processing of the land cover transitions data
 
@@ -57,3 +57,4 @@ The scripts used for data preparation are available in the [`R`](R) folder.
 - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2019). dplyr: A Grammar of Data Manipulation. R package version 0.8.0.1. https://CRAN.R-project.org/package=dplyr
 - Lionel Henry and Hadley Wickham (2019). purrr: Functional Programming Tools. R package version 0.3.2. https://CRAN.R-project.org/package=purrr
 - Jakub Nowosad (2018). rgeopat2: Additional Functions for 'GeoPAT' 2. R package version 0.2.6.  https://CRAN.R-project.org/package=rgeopat2
+- Maximillian H.K. Hesselbarth, Marco Sciaini, Jakub Nowosad and Sebastian Hanss (2019). landscapemetrics: Landscape Metrics for Categorical Map Patterns. R package version 1.1. https://r-spatialecology.github.io/landscapemetrics/
