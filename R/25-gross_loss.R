@@ -49,7 +49,7 @@ gross_loss = c("Agriculture", "Forest", "Grassland", "Wetland", "Settlement", "S
   left_join(countries, by = c("cat" = "id")) %>%
   select(ISOCODE, UNSDCODE, NAME0, Year_change, From, To, Loss)
 
-readr::write_csv(gross_loss, "data/database/gross_loss.csv")
+readr::write_csv(gross_loss, "data/database/gross_losses.csv")
 
 # creates dataset for epi -------------------------------------------------
 # dir.create("data/epi")
