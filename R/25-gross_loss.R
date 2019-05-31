@@ -47,7 +47,7 @@ gross_loss = c("Agriculture", "Forest", "Grassland", "Wetland", "Settlement", "S
                       "Sparse_vegetation", "Bare_area", "Water") %>% 
   map_dfr(lc_loss, df = df) %>% 
   left_join(countries, by = c("cat" = "id")) %>%
-  select(ISOCODE, UNSDCODE, NAME0, Year_change, From, To, Loss)
+  select(ISOCODE, UNSDCODE, NAME0, Years_transitions = Year_change, From, To, Loss)
 
 readr::write_csv(gross_loss, "data/database/gross_losses.csv")
 

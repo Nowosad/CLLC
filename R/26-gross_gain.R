@@ -47,7 +47,7 @@ gross_gain = c("Agriculture", "Forest", "Grassland", "Wetland", "Settlement", "S
                       "Sparse_vegetation", "Bare_area", "Water") %>% 
   map_dfr(lc_gain, df = df) %>% 
   left_join(countries, by = c("cat" = "id")) %>%
-  select(ISOCODE, UNSDCODE, NAME0, Year_change, From, To, Gain)
+  select(ISOCODE, UNSDCODE, NAME0, Years_transitions = Year_change, From, To, Gain)
 
 readr::write_csv(gross_gain, "data/database/gross_gains.csv")
 
