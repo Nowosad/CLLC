@@ -1,4 +1,4 @@
-# Country-level Land Cover - categories and transitions
+# Country-level Land Cover - categories and transitions <img src="data/logo-clcc.png" align="right" height="139" />
 
 ## Country-level Land Cover Categories
 
