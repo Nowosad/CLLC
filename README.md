@@ -42,7 +42,7 @@ The scripts used for data preparation are available in the [`R`](R) folder.
 1. Reproject National Identifier Grid data to the [Equal Area Cylindrical](https://proj4.org/operations/projections/cea.html) projection and rasterize it
 1. Calculate one raster file for each five-year periods by combining two input rasters, e.g. a new value 12 of a pixel represents change from 1 (agriculture) to 2 (forest)
 1. Extract land cover transitions for each country in each five-year period
-1. Calculate land cover gross changes, gains, and losses over five-year periods
+1. Calculate land cover gross changes, gains, and losses over five-year periods by processing of the land cover transitions data
 
 ## References
 
